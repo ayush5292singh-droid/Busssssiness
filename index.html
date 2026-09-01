@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BUSINESS TYCOON</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- START -->
+
+<div id="startScreen">
+
+  <div class="start-panel">
+
+    <div class="logo">TYCOON<span>//</span>X</div>
+    <div class="tagline">BUILD THE EMPIRE. SURVIVE THE MARKET.</div>
+
+    <div class="start-line"></div>
+
+    <input id="playerName" placeholder="CEO NAME">
+
+    <input id="companyName" placeholder="COMPANY NAME">
+
+    <select id="industry">
+      <option>Technology</option>
+      <option>Automotive</option>
+      <option>Energy</option>
+      <option>Retail</option>
+      <option>Gaming</option>
+      <option>Food</option>
+    </select>
+
+    <button onclick="createCompany()">INITIALIZE COMPANY</button>
+
+    <p class="small">
+      Every decision has consequences.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- GAME -->
+
+<div id="game" class="hidden">
+
+<header>
+
+  <div class="brand">
+    TYCOON<span>//</span>X
+  </div>
+
+  <div class="world-time">
+    <strong id="clock">08:00</strong>
+    <small id="phase">DAY</small>
+  </div>
+
+  <div class="money-box">
+    <small>CASH</small>
+    <strong id="cash">$10,000</strong>
+  </div>
+
+  <button class="settings-btn" onclick="openSettings()">⚙</button>
+
+</header>
+
+
+<!-- ALERT -->
+
+<div id="alertBar">
+  <span id="alertMessage">SYSTEM ONLINE</span>
+  <span id="risk">RISK 0%</span>
+</div>
+
+
+<!-- COMPANY HUD -->
+
+<div class="hud">
+
+  <div>
+    <small>COMPANY</small>
+    <strong id="companyNameUI">---</strong>
+  </div>
+
+  <div>
+    <small>DAY</small>
+    <strong id="day">1</strong>
+  </div>
+
+  <div>
+    <small>LEVEL</small>
+    <strong id="level">1</strong>
+  </div>
+
+  <div>
+    <small>VALUE</small>
+    <strong id="companyValue">$10,000</strong>
+  </div>
+
+  <div>
+    <small>REPUTATION</small>
+    <strong id="reputation">50</strong>
+  </div>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<button class="active" onclick="showPage('overview',this)">
+HQ
+</button>
+
+<button onclick="showPage('business',this)">
+BUSINESS
+</button>
+
+<button onclick="showPage('market',this)">
+MARKET
+</button>
+
+<button onclick="showPage('stocks',this)">
+STOCKS
+</button>
+
+<button onclick="showPage('bank',this)">
+BANK
+</button>
+
+<button onclick="showPage('team',this)">
+TEAM
+</button>
+
+<button onclick="showPage('competitors',this)">
+RIVALS
+</button>
+
+</nav>
+
+
+<main>
+
+
+<!-- HQ -->
+
+<section id="overview" class="page active">
+
+<div class="hero">
+
+  <div>
+    <small>CEO COMMAND CENTER</small>
+
+    <h1 id="welcome">
+      Welcome, CEO
+    </h1>
+
+    <p id="industryText">
+      Your corporation is now operating.
+    </p>
+  </div>
+
+  <div class="level-box">
+
+    <strong id="rank">
+      STARTUP
+    </strong>
+
+    <div class="xp-track">
+      <div id="xpBar"></div>
+    </div>
+
+    <small id="xpText">
+      0 / 100 XP
+    </small>
+
+  </div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<h3>LIVE BUSINESS</h3>
+
+<div class="stat">
+<span>Revenue / cycle</span>
+<strong id="revenueCycle">$0</strong>
+</div>
+
+<div class="stat">
+<span>Expenses / cycle</span>
+<strong id="expenseCycle">$0</strong>
+</div>
+
+<div class="stat">
+<span>Net cash flow</span>
+<strong id="cashFlow">$0</strong>
+</div>
+
+<div class="stat">
+<span>Inventory</span>
+<strong id="inventory">100%</strong>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>COMPANY HEALTH</h3>
+
+<div class="health">
+
+<div class="health-ring">
+<span id="health">100%</span>
+</div>
+
+</div>
+
+<p id="healthText">
+Company operating normally.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>LIVE EVENTS</h3>
+
+<div id="eventFeed">
+Waiting for market activity...
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>CEO OBJECTIVE</h3>
+
+<div id="objective">
+Build your first $50,000 company.
+</div>
+
+<div class="progress">
+<div id="objectiveBar"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="decision-panel">
+
+<h2>CEO DECISIONS</h2>
+
+<p>
+Your company runs automatically. Your job is to make strategic decisions.
+</p>
+
+<div class="decision-buttons">
+
+<button onclick="upgradeProduction()">
+🏭 EXPAND PRODUCTION
+</button>
+
+<button onclick="marketingCampaign()">
+📢 MARKETING
+</button>
+
+<button onclick="research()">
+🧠 RESEARCH
+</button>
+
+<button onclick="hireEmployee()">
+👨‍💼 HIRE
+</button>
+
+<button onclick="buyInventory()">
+📦 BUY INVENTORY
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BUSINESS -->
+
+<section id="business" class="page">
+
+<div class="title">
+<small>OPERATIONS</small>
+<h2>BUSINESS CONTROL</h2>
+</div>
+
+<div class="business-grid">
+
+<div class="big-card">
+
+<h3>PRODUCTION SYSTEM</h3>
+
+<div class="production-number">
+<span id="production">100</span>
+<small>UNITS / CYCLE</small>
+</div>
+
+<div class="bar">
+<div id="productionBar"></div>
+</div>
+
+<p>
+Production automatically converts inventory into products.
+</p>
+
+</div>
+
+
+<div class="big-card">
+
+<h3>INVENTORY</h3>
+
+<div class="production-number">
+<span id="inventoryBig">100%</span>
+<small>CAPACITY</small>
+</div>
+
+<div class="bar">
+<div id="inventoryBar"></div>
+</div>
+
+<button onclick="buyInventory()">
+RESTOCK INVENTORY
+</button>
+
+</div>
+
+
+<div class="big-card">
+
+<h3>UPGRADES</h3>
+
+<div class="upgrade-row">
+<span>Production</span>
+<strong id="prodLevel">1</strong>
+<button onclick="upgradeProduction()">UPGRADE</button>
+</div>
+
+<div class="upgrade-row">
+<span>Marketing</span>
+<strong id="marketingLevel">1</strong>
+<button onclick="marketingCampaign()">UPGRADE</button>
+</div>
+
+<div class="upgrade-row">
+<span>Research</span>
+<strong id="researchLevel">1</strong>
+<button onclick="research()">UPGRADE</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MARKET -->
+
+<section id="market" class="page">
+
+<div class="title">
+<small>GLOBAL ECONOMY</small>
+<h2>MARKET CONTROL</h2>
+</div>
+
+<div class="market-main">
+
+<div class="market-number">
+<span id="marketIndex">100</span>
+<small>MARKET INDEX</small>
+</div>
+
+<div id="marketCondition">
+STABLE MARKET
+</div>
+
+<div class="graph" id="graph"></div>
+
+<div class="market-stats">
+
+<div>
+<small>DEMAND</small>
+<strong id="demand">100%</strong>
+</div>
+
+<div>
+<small>VOLATILITY</small>
+<strong id="volatility">LOW</strong>
+</div>
+
+<div>
+<small>ECONOMIC HEALTH</small>
+<strong id="economy">100%</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STOCK MARKET -->
+
+<section id="stocks" class="page">
+
+<div class="title">
+<small>EXCHANGE</small>
+<h2>STOCK MARKET</h2>
+</div>
+
+<div id="stockList"></div>
+
+<div class="trade">
+
+<input id="stockTicker"
+placeholder="ENTER TICKER">
+
+<input id="stockAmount"
+type="number"
+min="1"
+value="1">
+
+<button onclick="buyStock()">
+BUY
+</button>
+
+<button onclick="sellStock()">
+SELL
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>PORTFOLIO</h3>
+
+<div id="portfolio">
+No investments.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BANK -->
+
+<section id="bank" class="page">
+
+<div class="title">
+<small>FINANCIAL SYSTEM</small>
+<h2>BANK</h2>
+</div>
+
+<div class="bank-grid">
+
+<div class="card">
+
+<h3>BUSINESS LOAN</h3>
+
+<div class="loan-value" id="loan">
+$0
+</div>
+
+<div class="stat">
+<span>Interest</span>
+<strong>8%</strong>
+</div>
+
+<div class="stat">
+<span>Loan age</span>
+<strong id="loanAge">0 DAYS</strong>
+</div>
+
+<div class="stat">
+<span>Status</span>
+<strong id="loanStatus">NO LOAN</strong>
+</div>
+
+<button onclick="takeLoan(10000)">
+BORROW $10,000
+</button>
+
+<button onclick="takeLoan(25000)">
+BORROW $25,000
+</button>
+
+<button class="danger" onclick="repayLoan()">
+REPAY $5,000
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>FINANCIAL WARNING</h3>
+
+<p id="bankWarning">
+A loan can save your company — or destroy it.
+</p>
+
+<div class="danger-meter">
+
+<div id="debtBar"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TEAM -->
+
+<section id="team" class="page">
+
+<div class="title">
+<small>HUMAN RESOURCES</small>
+<h2>YOUR TEAM</h2>
+</div>
+
+<div class="card">
+
+<h3>EMPLOYEES</h3>
+
+<div id="employees">
+No employees.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RIVALS -->
+
+<section id="competitors" class="page">
+
+<div class="title">
+<small>CORPORATE WAR</small>
+<h2>COMPETING COMPANIES</h2>
+</div>
+
+<div id="rivals"></div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div id="settings" class="modal hidden">
+
+<div class="settings-panel">
+
+<button class="close" onclick="closeSettings()">×</button>
+
+<small>SYSTEM</small>
+
+<h2>SETTINGS</h2>
+
+<div class="setting">
+<span>Sound</span>
+<button onclick="toggleSound()" id="sound">
+ON
+</button>
+</div>
+
+<div class="setting">
+<span>Simulation Speed</span>
+
+<select id="speed">
+<option value="1">NORMAL</option>
+<option value="2">FAST</option>
+</select>
+
+</div>
+
+<hr>
+
+<h3 class="danger-text">
+DANGER ZONE
+</h3>
+
+<p>
+Resetting will permanently delete your company,
+cash, stocks, employees, loans, upgrades and level.
+</p>
+
+<button class="reset" onclick="resetGame()">
+⚠ RESET COMPANY
+</button>
+
+</div>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
